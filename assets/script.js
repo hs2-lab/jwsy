@@ -153,12 +153,14 @@
   }
 
   const sampleMessages = [
-    { id: 's1', name: '김OO', date: '2026.05.25', text: '두 분의 아름다운 시작을 진심으로 축하합니다. 행복한 날들만 가득하시길 바랍니다.', sample: true },
-    { id: 's2', name: '이OO', date: '2026.05.25', text: '서로에게 가장 든든한 사람이 되어 오래오래 행복하세요.', sample: true },
-    { id: 's3', name: '박OO', date: '2026.05.25', text: '소중한 결혼을 진심으로 축복합니다. 예쁜 추억 많이 만드세요.', sample: true },
-    { id: 's4', name: '최OO', date: '2026.05.25', text: '따뜻하고 빛나는 하루가 되길 바랍니다.', sample: true },
-    { id: 's5', name: '정OO', date: '2026.05.25', text: '행복한 결혼생활 응원합니다.', sample: true }
-  ];
+  {
+    id: "s1",
+    name: "ㅎㅎㅎ",
+    date: "2026.05.25",
+    text: "결혼 축하해요 ♥",
+    sample: true
+  }
+];
 
   const STORAGE_KEY = 'wedding_guestbook_local_v6';
   const guestForm = document.getElementById('guest-form');
