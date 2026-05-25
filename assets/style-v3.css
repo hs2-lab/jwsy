@@ -16,7 +16,7 @@ html, body {
   padding: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-family: 'Gowun Dodum', 'Apple SD Gothic Neo', sans-serif;
 }
 
 body {
@@ -36,10 +36,22 @@ section {
   border-bottom: 1px solid rgba(221, 213, 206, 0.7);
 }
 
+section:not(.hero) {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .hero {
   position: relative;
   padding: 0;
-  min-height: 72vh;
+  min-height: 78vh;
+  max-height: 600px;
   overflow: hidden;
   border-bottom: 1px solid rgba(221, 213, 206, 0.7);
 }
@@ -84,32 +96,58 @@ section {
 
 .hero-inner { max-width: 340px; }
 
+.eyebrow,
+.hero-title,
+.hero-date,
+.hero-place {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: heroFadeUp 0.9s ease forwards;
+}
+
 .eyebrow {
   font-size: 12px;
   letter-spacing: .24em;
   text-transform: uppercase;
-  margin-bottom: 12px;
-  opacity: .95;
+  margin-bottom: 8px;
+  font-weight: 700;
+  opacity: .85;
+  animation-delay: 0.15s;
 }
 
 .hero-title {
-  font-size: 29px;
+  font-family: 'Gowun Dodum', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 20px;
   font-weight: 500;
-  line-height: 1.35;
-  margin-bottom: 14px;
+  line-height: 1.0;
+  margin-bottom: 8px;
+  animation-delay: 0.35s;
 }
 
 .hero-date,
 .hero-place {
-  font-size: 17px;
-  line-height: 1.8;
-  opacity: .97;
+  font-family: 'Gowun Dodum', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  opacity: .85;
+  animation-delay: 0.55s;
+}
+
+.hero-place {
+  animation-delay: 0.72s;
+}
+
+@keyframes heroFadeUp {
+  to {
+    opacity: 0.85;
+    transform: translateY(0);
+  }
 }
 
 .section-title {
   text-align: center;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 700;
   margin-bottom: 12px;
   color: var(--text);
 }
@@ -181,7 +219,7 @@ section {
 }
 
 .couple-name {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
   color: #241f1b;
   line-height: 1.25;
@@ -194,6 +232,12 @@ section {
   font-size: 18px;
   color: #b79a86;
   transform: translateY(-2px);
+  animation: heartFloat 2.8s ease-in-out infinite;
+}
+
+@keyframes heartFloat {
+  0%, 100% { transform: translateY(-2px); }
+  50% { transform: translateY(-6px); }
 }
 
 .calendar-section {
@@ -254,6 +298,18 @@ section {
   background: var(--accent);
   color: #fff;
   font-weight: 500;
+  animation: softPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes softPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(200, 159, 132, 0.18);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 0 8px rgba(200, 159, 132, 0);
+  }
 }
 
 .countdown-text-line {
@@ -330,6 +386,15 @@ section {
   color: #5d544d;
   text-decoration: none;
   font-size: 14px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+}
+
+.map-link-btn:hover {
+  transform: translateY(-2px);
+}
+
+.map-link-btn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .map-logo {
@@ -380,6 +445,12 @@ section {
   border-radius: 16px;
   padding: 15px 16px;
   background: #fffdfa;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.directions-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(38, 27, 18, 0.08);
 }
 
 .directions-label {
@@ -407,6 +478,16 @@ section {
   border-radius: 12px;
   background: #efeae4;
   padding: 0;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.gallery-thumb:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(38, 27, 18, 0.08);
+}
+
+.gallery-thumb:active {
+  transform: scale(0.98);
 }
 
 .gallery-thumb img {
@@ -426,6 +507,12 @@ section {
   border-radius: 18px;
   overflow: hidden;
   background: #fffdfa;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.rounded-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(38, 27, 18, 0.08);
 }
 
 .contact-row.rounded {
@@ -522,6 +609,15 @@ section {
   color: #5f5650;
   font-size: 13px;
   white-space: nowrap;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+}
+
+.copy-btn:hover {
+  transform: translateY(-2px);
+}
+
+.copy-btn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .open-message-btn {
@@ -534,6 +630,16 @@ section {
   font-size: 15px;
   margin-bottom: 16px;
   box-shadow: 0 10px 24px rgba(143, 121, 98, 0.14);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+}
+
+.open-message-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(143, 121, 98, 0.18);
+}
+
+.open-message-btn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .guestbook {
@@ -616,6 +722,15 @@ section {
   color: #6a625c;
   font-size: 20px;
   line-height: 1;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+}
+
+.nav-arrow:hover {
+  transform: translateY(-2px);
+}
+
+.nav-arrow:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .message-modal,

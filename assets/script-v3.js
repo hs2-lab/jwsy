@@ -6,22 +6,13 @@
   const textEl = document.getElementById('dday-text');
   if (textEl) textEl.textContent = String(days) + '일';
 
-  /*
-    메인 사진 설정
-    - false: hero-01.jpg 한 장만 고정 사용
-    - true : hero-01.jpg, hero-02.jpg 슬라이드 사용
-  */
   const ENABLE_HERO_SLIDESHOW = false;
-
-  const heroImages = ENABLE_HERO_SLIDESHOW
-    ? [
-        './assets/images/hero/hero-01.jpg',
-        './assets/images/hero/hero-02.jpg'
-      ]
-    : [
-        './assets/images/hero/hero-01.jpg'
-      ];
-
+ const heroImages = ENABLE_HERO_SLIDESHOW
+  ? [
+      './assets/images/hero/hero-04.jpg',
+      './assets/images/hero/hero-02.jpg'
+    ]
+  : ['./assets/images/hero/hero-04.jpg'];
   const heroSlideA = document.getElementById('hero-slide-a');
   const heroSlideB = document.getElementById('hero-slide-b');
 
@@ -67,8 +58,8 @@
 
   if (galleryGrid) {
     galleryGrid.innerHTML = galleryImages.map((item, index) => `
-      <button class="gallery-thumb" type="button" data-index="${index}" aria-label="${item.alt}">
-        <img src="${item.src}" alt="${item.alt}" loading="lazy" />
+      <button type="button" class="gallery-thumb" data-index="${index}" aria-label="${item.alt}">
+        <img src="${item.src}" alt="${item.alt}">
       </button>
     `).join('');
   }
@@ -152,15 +143,27 @@
     }, { passive: true });
   }
 
+  const sections = Array.from(document.querySelectorAll('section'));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12
+  });
+
+  sections.forEach((section) => {
+    if (!section.classList.contains('hero')) {
+      observer.observe(section);
+    }
+  });
+
   const sampleMessages = [
-  {
-    id: "s1",
-    name: "ㅎㅎㅎ",
-    date: "2026.05.25",
-    text: "결혼 축하해요 ♥",
-    sample: true
-  }
-];
+    { id: 's1', name: 'ㅎㅎㅎ', date: '2026.05.25', text: '결혼 축하해요 ♥', sample: true }
+  ];
 
   const STORAGE_KEY = 'wedding_guestbook_local_v6';
   const guestForm = document.getElementById('guest-form');
@@ -173,15 +176,14 @@
   const messageModalDim = document.getElementById('message-modal-dim');
   const closeMessageModalBtn = document.getElementById('close-message-modal');
   const cancelMessageModalBtn = document.getElementById('cancel-message-modal');
-
   const deleteModal = document.getElementById('delete-modal');
   const deleteModalDim = document.getElementById('delete-modal-dim');
   const closeDeleteModalBtn = document.getElementById('close-delete-modal');
   const cancelDeleteModalBtn = document.getElementById('cancel-delete-modal');
   const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
   const deletePasswordInput = document.getElementById('delete-password');
-
   const copyButtons = Array.from(document.querySelectorAll('.copy-btn'));
+
   const pageSize = 5;
   let currentPage = 1;
   let deleteTargetId = null;
@@ -246,66 +248,49 @@
   function renderGuestbook() {
     const totalPages = Math.max(1, Math.ceil(guestbookData.length / pageSize));
     if (currentPage > totalPages) currentPage = totalPages;
+
     const start = (currentPage - 1) * pageSize;
     const visible = guestbookData.slice(start, start + pageSize);
 
     guestbookList.innerHTML = visible.map(item => `
       <div class="guest-entry">
         <div class="guest-head">
-          <span class="guest-name">${item.name}</span>
+          <div class="guest-name">${item.name}</div>
           <div class="guest-head-right">
             <span>${item.date}</span>
-            ${item.sample ? '' : `<button type="button" class="delete-entry-btn" data-id="${item.id}" aria-label="메시지 삭제">×</button>`}
+            ${item.sample ? '' : `<button type="button" class="delete-entry-btn" data-id="${item.id}" aria-label="메시지 삭제">&times;</button>`}
           </div>
         </div>
-        <div class="guest-text">${item.text}</div>
+        <div class="guest-text">${item.text.replace(/\n/g, '<br>')}</div>
       </div>
     `).join('');
 
-    pageLabel.textContent = currentPage + ' / ' + totalPages;
-    if (prevPageBtn) {
-      prevPageBtn.disabled = currentPage === 1;
-      prevPageBtn.style.opacity = currentPage === 1 ? '0.45' : '1';
-    }
-    if (nextPageBtn) {
-      nextPageBtn.disabled = currentPage === totalPages;
-      nextPageBtn.style.opacity = currentPage === totalPages ? '0.45' : '1';
-    }
-
+    pageLabel.textContent = `${currentPage} / ${totalPages}`;
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages;
     attachDeleteEvents();
   }
-
-  if (openMessageModalBtn) openMessageModalBtn.addEventListener('click', openMessageModal);
-  if (messageModalDim) messageModalDim.addEventListener('click', closeMessageModal);
-  if (closeMessageModalBtn) closeMessageModalBtn.addEventListener('click', closeMessageModal);
-  if (cancelMessageModalBtn) cancelMessageModalBtn.addEventListener('click', closeMessageModal);
-
-  if (deleteModalDim) deleteModalDim.addEventListener('click', closeDeleteModal);
-  if (closeDeleteModalBtn) closeDeleteModalBtn.addEventListener('click', closeDeleteModal);
-  if (cancelDeleteModalBtn) cancelDeleteModalBtn.addEventListener('click', closeDeleteModal);
 
   if (guestForm) {
     guestForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      const name = document.getElementById('guest-name').value.trim();
-      const password = document.getElementById('guest-password').value.trim();
-      const message = document.getElementById('guest-message').value.trim();
+
+      const name = guestForm.name.value.trim();
+      const password = guestForm.password.value.trim();
+      const message = guestForm.message.value.trim();
+
       if (!name || !password || !message) return;
 
-      const today = new Date();
-      const date = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')}`;
-      const newItem = {
-        id: 'm_' + Date.now(),
+      const stored = loadStoredMessages();
+      stored.unshift({
+        id: Date.now().toString(36),
         name,
         password,
-        date,
-        text: message
-      };
+        message,
+        date: new Date().toLocaleDateString('ko-KR').replace(/\./g, '.').replace(/\s/g, '')
+      });
 
-      const stored = loadStoredMessages();
-      stored.unshift(newItem);
       saveStoredMessages(stored);
-
       guestbookData = loadGuestbook();
       currentPage = 1;
       renderGuestbook();
@@ -323,7 +308,6 @@
       const target = stored.find(item => item.id === deleteTargetId);
 
       if (!target) {
-        alert('삭제할 메시지를 찾을 수 없습니다.');
         closeDeleteModal();
         return;
       }
@@ -333,13 +317,9 @@
         return;
       }
 
-      const updated = stored.filter(item => item.id !== deleteTargetId);
-      saveStoredMessages(updated);
+      const nextStored = stored.filter(item => item.id !== deleteTargetId);
+      saveStoredMessages(nextStored);
       guestbookData = loadGuestbook();
-
-      const totalPages = Math.max(1, Math.ceil(guestbookData.length / pageSize));
-      if (currentPage > totalPages) currentPage = totalPages;
-
       renderGuestbook();
       closeDeleteModal();
     });
@@ -364,9 +344,20 @@
     });
   }
 
+  if (openMessageModalBtn) openMessageModalBtn.addEventListener('click', openMessageModal);
+  if (closeMessageModalBtn) closeMessageModalBtn.addEventListener('click', closeMessageModal);
+  if (cancelMessageModalBtn) cancelMessageModalBtn.addEventListener('click', closeMessageModal);
+  if (messageModalDim) messageModalDim.addEventListener('click', closeMessageModal);
+
+  if (closeDeleteModalBtn) closeDeleteModalBtn.addEventListener('click', closeDeleteModal);
+  if (cancelDeleteModalBtn) cancelDeleteModalBtn.addEventListener('click', closeDeleteModal);
+  if (deleteModalDim) deleteModalDim.addEventListener('click', closeDeleteModal);
+
   copyButtons.forEach((button) => {
     button.addEventListener('click', async function () {
       const text = button.getAttribute('data-copy');
+      if (!text) return;
+
       try {
         await navigator.clipboard.writeText(text);
         const original = button.textContent;
@@ -375,7 +366,7 @@
           button.textContent = original;
         }, 1200);
       } catch (e) {
-        alert('복사하지 못했습니다.');
+        alert('복사에 실패했습니다.');
       }
     });
   });
