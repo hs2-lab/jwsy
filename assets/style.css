@@ -851,3 +851,16 @@ section {
     width: 100%;
   }
 }
+
+.page-footer {
+  padding: 22px 20px 34px;
+  text-align: center;
+  background: var(--surface);
+}
+
+.page-footer-text {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
