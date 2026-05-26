@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
@@ -20,45 +21,52 @@
   <meta property="og:image:height" content="630" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/style-v3.css?v=20260525-1" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/style-v4.css?v=20260526-1" />
 </head>
+
 <body>
   <section class="hero">
-    <div class="hero-slides">
-      <div class="hero-slide is-active" id="hero-slide-a"></div>
-      <div class="hero-slide" id="hero-slide-b"></div>
-    </div>
-
-    <div style="height: 80px;"></div>
+    <div class="hero-bg" id="hero-bg"></div>
     <div class="hero-overlay">
       <div class="hero-inner">
         <div class="eyebrow">Wedding Invitation</div>
-        <h1 class="hero-title">지운 ♥ 송이</h1>
-        <p class="hero-date">2026년 8월 22일 토요일 11시</p>
-        <p class="hero-place">더컨벤션 잠실 그랜드볼룸홀(1F)</p>
       </div>
     </div>
   </section>
 
   <section class="intro-family-section">
     <div class="section-block intro-block">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <p class="hero-date">2026년 8월 22일 토요일 오전 11시</p>
+        <p class="hero-place">더컨벤션 잠실(교통회관) 1층 그랜드볼룸홀</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro-family-section">
+    <div class="section-block intro-block">
+
       <div style="height: 30px;"></div>
       <h2 class="section-title">결혼합니다</h2>
       <div class="title-line"></div>
       <p class="message">
         오랜 친구였던 저희가<br />
-이제는 가장 가까운 마음으로<br />
-평생을 함께하기로 했습니다<br />
-이 소중한 시작의 자리에<br />
-함께해 주셔서 감사드립니다<br />
+        이제는 가장 가까운 마음으로<br />
+        평생을 함께하기로 했습니다<br />
+        이 소중한 시작의 자리에<br />
+        함께해 주셔서 감사드립니다<br />
       </p>
     </div>
 
     <div class="section-block family-block">
       <div class="couple-layout">
         <div class="couple-side">
+          <!-- 1. 어린시절 사진 구역 -->
+          <div class="couple-avatar">
+            <img src="./assets/images/hero/jwb.jpg" alt="신부 어린시절">
+          </div>
           <div class="couple-role"><strong>정완순 · 이희란</strong></div>
           <div class="couple-sub">아들</div>
           <div class="couple-name">정지운</div>
@@ -67,13 +75,18 @@
         <div class="couple-heart">♥</div>
 
         <div class="couple-side">
+          <!-- 1. 어린시절 사진 구역 -->
+          <div class="couple-avatar">
+            <img src="./assets/images/hero/syb.jpg" alt="신부 어린시절">
+          </div>
+
           <div class="couple-role"><strong>한승희 · 박춘이</strong></div>
           <div class="couple-sub">딸</div>
           <div class="couple-name">한송이</div>
         </div>
       </div>
     </div>
-   <div style="height: 50px;"></div>
+    <div style="height: 50px;"></div>
   </section>
 
   <section class="calendar-section">
@@ -143,7 +156,7 @@
     <div class="title-line"></div>
 
     <div class="location-simple">
-      더컨벤션 잠실(교통회관) 그랜드볼룸홀(1F)<br />
+      더컨벤션 잠실(교통회관) 1층 그랜드볼룸홀<br />
       서울 송파구 올림픽로 319
     </div>
 
@@ -156,7 +169,8 @@
     </div>
 
     <div class="map-link-buttons">
-      <a href="https://map.kakao.com/link/map/더컨벤션 잠실,37.515152,127.100075" target="_blank" rel="noopener noreferrer" class="map-link-btn">
+      <a href="https://map.kakao.com/link/map/더컨벤션 잠실,37.515152,127.100075" target="_blank" rel="noopener noreferrer"
+        class="map-link-btn">
         <span class="map-logo kakao">K</span>
         <span>카카오맵</span>
       </a>
@@ -165,7 +179,7 @@
         <span>네이버지도</span>
       </a>
       <a href="https://tmap.life/f5141538" target="_blank" rel="noopener noreferrer" class="map-link-btn">
-        <span class="map-logo tmap" >T</span>
+        <span class="map-logo tmap">T</span>
         <span>티맵</span>
       </a>
     </div>
@@ -197,8 +211,8 @@
       <div class="directions-card">
         <div class="directions-label">주차</div>
         <div class="directions-text">
-          교통회관 지상·지하 주차장 이용 가능<br />
-          하객 2시간 무료 주차
+          더컨벤션 잠실(교통회관) 주차장 이용<br />
+          2시간 무료 주차
         </div>
       </div>
     </div>
@@ -210,63 +224,8 @@
     <div class="gallery-grid" id="gallery-grid"></div>
   </section>
 
-  <section class="celebrate-section">
-    <h2 class="section-title">축하 연락처</h2>
-    <div class="title-line"></div>
-
-    <div class="rounded-card-group">
-      <div class="rounded-card">
-        <div class="contact-row rounded">
-          <div class="contact-name">신랑 정지운</div>
-          <div class="contact-icons">
-            <a href="tel:010-9232-9731" class="icon-btn" aria-label="신랑에게 전화">☎</a>
-            <a href="sms:010-9232-9731" class="icon-btn" aria-label="신랑에게 문자">✉</a>
-          </div>
-        </div>
-        <div class="contact-row rounded">
-          <div class="contact-name">혼주 정완순</div>
-          <div class="contact-icons">
-            <a href="tel:010-0000-0000" class="icon-btn" aria-label="혼주에게 전화">☎</a>
-            <a href="sms:010-0000-0000" class="icon-btn" aria-label="혼주에게 문자">✉</a>
-          </div>
-        </div>
-        <div class="contact-row rounded last">
-          <div class="contact-name">혼주 이희란</div>
-          <div class="contact-icons">
-            <a href="tel:010-0000-0000" class="icon-btn" aria-label="혼주에게 전화">☎</a>
-            <a href="sms:010-0000-0000" class="icon-btn" aria-label="혼주에게 문자">✉</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="rounded-card">
-        <div class="contact-row rounded">
-          <div class="contact-name">신부 한송이</div>
-          <div class="contact-icons">
-            <a href="tel:010-7477-1376" class="icon-btn" aria-label="신부에게 전화">☎</a>
-            <a href="sms:010-7477-1376" class="icon-btn" aria-label="신부에게 문자">✉</a>
-          </div>
-        </div>
-        <div class="contact-row rounded">
-          <div class="contact-name">혼주 한승희</div>
-          <div class="contact-icons">
-            <a href="tel:010-5348-1376" class="icon-btn" aria-label="혼주에게 전화">☎</a>
-            <a href="sms:010-5348-1376" class="icon-btn" aria-label="혼주에게 문자">✉</a>
-          </div>
-        </div>
-        <div class="contact-row rounded last">
-          <div class="contact-name">혼주 박춘이</div>
-          <div class="contact-icons">
-            <a href="tel:010-6254-1376" class="icon-btn" aria-label="혼주에게 전화">☎</a>
-            <a href="sms:010-6254-1376" class="icon-btn" aria-label="혼주에게 문자">✉</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="heart-section">
-    <h2 class="section-title">축하의 마음 전하실 곳</h2>
+    <h2 class="section-title">마음 전하실 곳</h2>
     <div class="title-line"></div>
 
     <div class="rounded-card-group">
@@ -274,7 +233,11 @@
         <details class="account-card">
           <summary>
             <span>신랑 정지운</span>
-            <span class="summary-arrow" aria-hidden="true"></span>
+            <span class="summary-actions">
+              <a href="tel:010-9232-9731" class="icon-btn" aria-label="신랑에게 전화" onclick="event.stopPropagation()">☎</a>
+              <a href="sms:010-9232-9731" class="icon-btn" aria-label="신랑에게 문자" onclick="event.stopPropagation()">✉</a>
+              <span class="summary-arrow" aria-hidden="true"></span>
+            </span>
           </summary>
           <div class="account-panel">
             <div class="account-line">
@@ -287,7 +250,11 @@
         <details class="account-card">
           <summary>
             <span>혼주 정완순</span>
-            <span class="summary-arrow" aria-hidden="true"></span>
+            <span class="summary-actions">
+              <a href="tel:010-0000-0000" class="icon-btn" aria-label="혼주에게 전화" onclick="event.stopPropagation()">☎</a>
+              <a href="sms:010-0000-0000" class="icon-btn" aria-label="혼주에게 문자" onclick="event.stopPropagation()">✉</a>
+              <span class="summary-arrow" aria-hidden="true"></span>
+            </span>
           </summary>
           <div class="account-panel">
             <div class="account-line">
@@ -300,7 +267,11 @@
         <details class="account-card">
           <summary>
             <span>혼주 이희란</span>
-            <span class="summary-arrow" aria-hidden="true"></span>
+            <span class="summary-actions">
+              <a href="tel:010-0000-0000" class="icon-btn" aria-label="혼주에게 전화" onclick="event.stopPropagation()">☎</a>
+              <a href="sms:010-0000-0000" class="icon-btn" aria-label="혼주에게 문자" onclick="event.stopPropagation()">✉</a>
+              <span class="summary-arrow" aria-hidden="true"></span>
+            </span>
           </summary>
           <div class="account-panel">
             <div class="account-line">
@@ -315,7 +286,11 @@
         <details class="account-card">
           <summary>
             <span>신부 한송이</span>
-            <span class="summary-arrow" aria-hidden="true"></span>
+            <span class="summary-actions">
+              <a href="tel:010-7477-1376" class="icon-btn" aria-label="신부에게 전화" onclick="event.stopPropagation()">☎</a>
+              <a href="sms:010-7477-1376" class="icon-btn" aria-label="신부에게 문자" onclick="event.stopPropagation()">✉</a>
+              <span class="summary-arrow" aria-hidden="true"></span>
+            </span>
           </summary>
           <div class="account-panel">
             <div class="account-line">
@@ -328,7 +303,11 @@
         <details class="account-card">
           <summary>
             <span>혼주 한승희</span>
-            <span class="summary-arrow" aria-hidden="true"></span>
+            <span class="summary-actions">
+              <a href="tel:010-5348-1376" class="icon-btn" aria-label="혼주에게 전화" onclick="event.stopPropagation()">☎</a>
+              <a href="sms:010-5348-1376" class="icon-btn" aria-label="혼주에게 문자" onclick="event.stopPropagation()">✉</a>
+              <span class="summary-arrow" aria-hidden="true"></span>
+            </span>
           </summary>
           <div class="account-panel">
             <div class="account-line">
@@ -341,7 +320,11 @@
         <details class="account-card">
           <summary>
             <span>혼주 박춘이</span>
-            <span class="summary-arrow" aria-hidden="true"></span>
+            <span class="summary-actions">
+              <a href="tel:010-6254-1376" class="icon-btn" aria-label="혼주에게 전화" onclick="event.stopPropagation()">☎</a>
+              <a href="sms:010-6254-1376" class="icon-btn" aria-label="혼주에게 문자" onclick="event.stopPropagation()">✉</a>
+              <span class="summary-arrow" aria-hidden="true"></span>
+            </span>
           </summary>
           <div class="account-panel">
             <div class="account-line">
@@ -374,7 +357,6 @@
       </div>
     </div>
   </section>
-  
 
   <div class="message-modal" id="message-modal" aria-hidden="true">
     <div class="message-modal-dim" id="message-modal-dim"></div>
@@ -395,12 +377,14 @@
 
         <div class="form-field">
           <label for="guest-password">비밀번호</label>
-          <input id="guest-password" name="password" type="password" maxlength="20" placeholder="삭제 시 사용할 비밀번호" required />
+          <input id="guest-password" name="password" type="password" maxlength="20" placeholder="삭제 시 사용할 비밀번호"
+            required />
         </div>
 
         <div class="form-field">
           <label for="guest-message">메시지</label>
-          <textarea id="guest-message" name="message" rows="5" maxlength="200" placeholder="축하 메시지를 남겨주세요" required></textarea>
+          <textarea id="guest-message" name="message" rows="5" maxlength="200" placeholder="축하 메시지를 남겨주세요"
+            required></textarea>
         </div>
 
         <div class="sheet-actions">
@@ -443,21 +427,23 @@
     <button class="lightbox-arrow right" id="lightbox-next" aria-label="다음 이미지"><span></span></button>
   </div>
 
- <footer class="page-footer">
-  <p class="page-footer-text">
-    소중한 걸음에 감사드리며<br />
-    오래도록 따뜻한 마음 간직하며 살겠습니다.
-  </p>
-</footer>
+  <footer class="page-footer">
+    <p class="page-footer-text">
+      소중한 걸음에 감사드리며<br />
+      오래도록 따뜻한 마음 간직하며 살겠습니다.
+    </p>
+  </footer>
 
-<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
-<script charset="UTF-8">
-  new daum.roughmap.Lander({
-    timestamp: "1779703870977",
-    key: "odwsvpon3f6",
-    mapHeight: "300"
-  }).render();
-</script>
-<script src="./assets/script-v3.js?v=20260525-1"></script>
+  <script charset="UTF-8" class="daum_roughmap_loader_script"
+    src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+  <script charset="UTF-8">
+    new daum.roughmap.Lander({
+      timestamp: "1779703870977",
+      key: "odwsvpon3f6",
+      mapHeight: "300"
+    }).render();
+  </script>
+  <script src="./assets/script-v4.js?v=20260526-1"></script>
 </body>
+
 </html>

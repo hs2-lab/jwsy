@@ -47,62 +47,77 @@ section.is-visible {
   transform: translateY(0);
 }
 
+/* ─── Hero ─── */
+
 .hero {
   position: relative;
   padding: 0;
-  min-height: 78vh;
-  max-height: 600px;
+  aspect-ratio: 8 / 10;
   overflow: hidden;
   border-bottom: 1px solid rgba(221, 213, 206, 0.7);
 }
 
-.hero-slides {
-  position: absolute;
-  inset: 0;
-}
-
-.hero-slide {
+.hero-bg {
   position: absolute;
   inset: 0;
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  opacity: 0;
-  transition: opacity 0.9s ease-in-out;
 }
 
-.hero-slide.is-active {
-  opacity: 1;
-}
-
-.hero-slide::after {
+.hero-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(34, 28, 24, 0.12), rgba(34, 28, 24, 0.38));
 }
 
 .hero-overlay {
   position: relative;
   z-index: 2;
-  min-height: 72vh;
+  height: 100%;
   display: flex;
-  align-items: flex-end;
   justify-content: center;
   text-align: center;
   padding: 32px 24px 56px;
   color: #fff;
 }
 
-.hero-inner { max-width: 340px; }
+.hero-inner {
+  max-width: 340px;
+}
 
+/* Hero shimmer sweep — full photo */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+
+@keyframes shimmerSweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Hero text fade-in */
 .eyebrow,
 .hero-title,
 .hero-date,
 .hero-place {
   opacity: 0;
-  transform: translateY(14px);
-  animation: heroFadeUp 0.9s ease forwards;
+  animation: heroFadeIn 1s ease forwards;
+}
+
+.eyebrow { animation-delay: 0.1s; }
+.hero-title { animation-delay: 0.35s; }
+.hero-date { animation-delay: 0.6s; }
+.hero-place { animation-delay: 0.8s; }
+
+@keyframes heroFadeIn {
+  to { opacity: 0.9; }
 }
 
 .eyebrow {
@@ -111,8 +126,6 @@ section.is-visible {
   text-transform: uppercase;
   margin-bottom: 8px;
   font-weight: 700;
-  opacity: .85;
-  animation-delay: 0.15s;
 }
 
 .hero-title {
@@ -121,7 +134,6 @@ section.is-visible {
   font-weight: 500;
   line-height: 1.0;
   margin-bottom: 8px;
-  animation-delay: 0.35s;
 }
 
 .hero-date,
@@ -129,20 +141,9 @@ section.is-visible {
   font-family: 'Gowun Dodum', 'Apple SD Gothic Neo', sans-serif;
   font-size: 14px;
   line-height: 1.7;
-  opacity: .85;
-  animation-delay: 0.55s;
 }
 
-.hero-place {
-  animation-delay: 0.72s;
-}
-
-@keyframes heroFadeUp {
-  to {
-    opacity: 0.85;
-    transform: translateY(0);
-  }
-}
+/* ─── Shared ─── */
 
 .section-title {
   text-align: center;
@@ -165,6 +166,8 @@ section.is-visible {
   font-size: 16px;
   color: #544c46;
 }
+
+/* ─── Intro & Family ─── */
 
 .intro-family-section {
   padding: 0;
@@ -201,6 +204,10 @@ section.is-visible {
   display: grid;
   grid-template-rows: auto auto auto;
   align-content: end;
+  display: flex;
+  flex-direction: column; /* 위에서 아래로 흐르게 */
+  align-items: center;    /* 가로 가운데 정렬 */
+  text-align: center;
 }
 
 .couple-role {
@@ -239,6 +246,8 @@ section.is-visible {
   0%, 100% { transform: translateY(-2px); }
   50% { transform: translateY(-6px); }
 }
+
+/* ─── Calendar ─── */
 
 .calendar-section {
   text-align: center;
@@ -324,6 +333,8 @@ section.is-visible {
   font-weight: 700;
   color: var(--accent-strong);
 }
+
+/* ─── Location ─── */
 
 .location-simple {
   text-align: center;
@@ -426,11 +437,12 @@ section.is-visible {
 .traffic-note {
   margin: 0 0 14px;
   padding: 13px 14px;
-  border: 1px solid #e8dfd7;
+
   border-radius: 16px;
-  background: #fcfaf8;
+
   color: #6b625c;
   font-size: 14px;
+  font-weight: 600;
   line-height: 1.75;
   text-align: center;
 }
@@ -466,6 +478,8 @@ section.is-visible {
   color: #5c544e;
 }
 
+/* ─── Gallery ─── */
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -496,6 +510,8 @@ section.is-visible {
   object-fit: cover;
   display: block;
 }
+
+/* ─── Contact / Account Cards ─── */
 
 .rounded-card-group {
   display: grid;
@@ -569,6 +585,16 @@ section.is-visible {
   display: none;
 }
 
+.summary-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.summary-actions .icon-btn {
+  padding: 4px;
+}
+
 .summary-arrow {
   width: 10px;
   height: 10px;
@@ -577,6 +603,7 @@ section.is-visible {
   transform: rotate(45deg);
   transition: transform 0.2s ease;
   margin-top: -4px;
+  flex: 0 0 auto;
 }
 
 .account-card[open] .summary-arrow {
@@ -619,6 +646,8 @@ section.is-visible {
 .copy-btn:active {
   transform: translateY(0) scale(0.98);
 }
+
+/* ─── Guestbook ─── */
 
 .open-message-btn {
   width: 100%;
@@ -732,6 +761,8 @@ section.is-visible {
 .nav-arrow:active {
   transform: translateY(0) scale(0.98);
 }
+
+/* ─── Modals ─── */
 
 .message-modal,
 .delete-modal {
@@ -859,6 +890,8 @@ section.is-visible {
   font-weight: 600;
 }
 
+/* ─── Lightbox ─── */
+
 .lightbox {
   position: fixed;
   inset: 0;
@@ -936,6 +969,8 @@ section.is-visible {
   display: none;
 }
 
+/* ─── Responsive ─── */
+
 @media (max-width: 360px) {
   .couple-layout {
     grid-template-columns: 1fr;
@@ -967,6 +1002,8 @@ section.is-visible {
   }
 }
 
+/* ─── Footer ─── */
+
 .page-footer {
   padding: 22px 20px 34px;
   text-align: center;
@@ -978,4 +1015,25 @@ section.is-visible {
   line-height: 1.8;
   color: var(--muted);
   letter-spacing: 0.02em;
+}
+
+/* 동그란 사진 박스 (모바일 화면에 맞춰 크기 지정) */
+.couple-avatar {
+  width: 120px;          /* 화면에 보여줄 가로 크기 */
+  height: 120px;         /* 화면에 보여줄 세로 크기 (가로와 일치) */
+  border-radius: 50%;    /* 완벽한 원형 테두리 */
+  overflow: hidden;      /* 원형 밖으로 나가는 이미지 커팅 */
+  margin-bottom: 15px;   /* 사진과 밑에 부모님 성함 사이의 간격 */
+  
+  /* 테두리를 살짝 주면 웨딩 느낌으로 더 깔끔해집니다 (선택사항) */
+  border: 3px solid #fff; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); 
+}
+
+/* 800x800 원본 이미지를 원 안에 꽉 채우는 설정 */
+.couple-avatar img {
+  width: 100%;           /* 부모(120px) 박스 가로에 맞춤 */
+  height: 100%;          /* 부모(120px) 박스 세로에 맞춤 */
+  object-fit: cover;     /* 1픽셀의 빈틈도 없이 꽉 채우기 */
+  display: block;
 }
