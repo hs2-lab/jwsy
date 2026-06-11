@@ -6,33 +6,33 @@
   var textEl = document.getElementById('dday-text');
   if (textEl) textEl.textContent = String(days) + '일';
 
- var heroBg = document.getElementById('hero-bg');
-if (heroBg) {
-  var videoEl = document.createElement('video');
-  
-  // 영상 파일 경로 (본인의 파일명으로 수정하세요)
-  videoEl.src = './assets/images/hero/01.mp4'; 
-  
-  // 🔇 소리 없이 계속 재생하기 위한 핵심 설정
-  videoEl.autoplay = true;   // 페이지 열리면 자동 재생
-  videoEl.loop = true;       // 끝까지 재생되면 처음부터 무한 반복
-  videoEl.muted = true;      // ⚠️ 음소거 (이게 없으면 모바일에서 재생이 안 됩니다)
-  videoEl.playsInline = true; // ⚠️ iOS 아이폰에서 전체화면으로 튕기는 현상 방지
-  
-  // 꽉 차게 보여주기 위한 스타일 설정
-  videoEl.style.width = '100%';
-  videoEl.style.height = '100%';
-  videoEl.style.objectFit = 'cover'; // 영상 비율 유지하며 화면 채우기
-  videoEl.style.position = 'absolute';
-  videoEl.style.top = '0';
-  videoEl.style.left = '0';
-  
-  heroBg.innerHTML = ''; 
-  heroBg.style.aspectRatio = '8 / 10';
-heroBg.style.width = '100%';
-heroBg.style.height = 'auto';
-  heroBg.appendChild(videoEl);
-}
+  var heroBg = document.getElementById('hero-bg');
+  if (heroBg) {
+    var videoEl = document.createElement('video');
+
+    // 영상 파일 경로 (본인의 파일명으로 수정하세요)
+    videoEl.src = './assets/images/hero/01.mp4';
+
+    // 🔇 소리 없이 계속 재생하기 위한 핵심 설정
+    videoEl.autoplay = true;   // 페이지 열리면 자동 재생
+    videoEl.loop = true;       // 끝까지 재생되면 처음부터 무한 반복
+    videoEl.muted = true;      // ⚠️ 음소거 (이게 없으면 모바일에서 재생이 안 됩니다)
+    videoEl.playsInline = true; // ⚠️ iOS 아이폰에서 전체화면으로 튕기는 현상 방지
+
+    // 꽉 차게 보여주기 위한 스타일 설정
+    videoEl.style.width = '100%';
+    videoEl.style.height = '100%';
+    videoEl.style.objectFit = 'cover'; // 영상 비율 유지하며 화면 채우기
+    videoEl.style.position = 'absolute';
+    videoEl.style.top = '0';
+    videoEl.style.left = '0';
+
+    heroBg.innerHTML = '';
+    heroBg.style.aspectRatio = '8 / 10';
+    heroBg.style.width = '100%';
+    heroBg.style.height = 'auto';
+    heroBg.appendChild(videoEl);
+  }
 
   var galleryGrid = document.getElementById('gallery-grid');
   var galleryImages = Array.from({ length: 16 }, function (_, i) {
@@ -219,54 +219,11 @@ heroBg.style.height = 'auto';
     return [].concat(loadStoredMessages(), sampleMessages);
   }
 
-  // 1. 카카오 SDK 초기화 (중복 초기화 방지)
-  if (typeof Kakao !== 'undefined' && !Kakao.isInitialized()) {
-    Kakao.init('32599aff7bd9dd685d2d1ba374b08f7b'); 
-  }
 
+  var navButtons = document.querySelectorAll('.nav-btn');
 
-  // 2. 버튼 클릭 이벤트 리스너 등록
-  var kakaoBtn = document.getElementById('kakao-share-btn');
-  
-  if (kakaoBtn) {
-    kakaoBtn.addEventListener('click', function() {
-      if (typeof Kakao !== 'undefined') {
-        
-        // 카카오톡 공유 - 위치 템플릿 호출
-        Kakao.Share.sendDefault({
-          objectType: 'location', // 위치 템플릿 필수 지정
-          address: '서울 송파구 올림픽로 319', // [필수] 실제 예식장 도로명/지번 주소
-          addressTitle: '더컨벤션 잠실(교통회관) 1층 그랜드볼룸홀', // [선택] 카카오톡 지도 뷰 상단에 표시될 식장 이름
-          content: {
-            title: '지운 ♡ 송이 결혼합니다', // [필수] 메시지 대제목
-            description: '2026년 8월 22일 11시, 오시는 길과 상세 안내를 확인해 보세요.', // [필수] 상세 설명
-            imageUrl: 'https://hs2-lab.github.io/jwsy/assets/images/hero/thn.jpg', // [필수] 메인 사진 URL
-            imageWidth: 600, // [선택] 이미지 너비 (픽셀)
-            imageHeight: 720, // [선택] 이미지 높이 (픽셀)
-            link: {
-              mobileWebUrl: window.location.href, // [필수] 클릭 시 청첩장 주소로 이동
-              webUrl: window.location.href,       // [필수] PC용 링크
-            },
-          },
-          buttons: [
-            {
-              title: '모바일 청첩장 보기', // 사용자 정의 버튼 이름
-              link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href,
-              },
-            }
-          ],
-        });
-
-      }
-    });
-  }
-
- var navButtons = document.querySelectorAll('.nav-btn');
-
-  navButtons.forEach(function(button) {
-    button.addEventListener('click', function() {
+  navButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
       // 1. 버튼의 목적지 ID 가져오기 (#location-section 등)
       var targetId = this.getAttribute('data-target');
       var targetSection = document.querySelector(targetId);
@@ -274,7 +231,7 @@ heroBg.style.height = 'auto';
       if (targetSection) {
         // 2. 해당 구역이 화면 최상단에서 얼마나 떨어져 있는지 절대 거리 계산
         var targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
-        
+
         // 3. 브라우저 창 전체를 해당 높이 좌표로 부드럽게 스크롤
         window.scrollTo({
           top: targetPosition,
@@ -308,14 +265,14 @@ heroBg.style.height = 'auto';
     guestbookList.innerHTML = visible.map(function (item) {
       return '<div class="guest-entry">' +
         '<div class="guest-head">' +
-          '<div class="guest-name">' + item.name + '</div>' +
-          '<div class="guest-head-right">' +
-            '<span>' + item.date + '</span>' +
-            (item.sample ? '' : '<button type="button" class="delete-entry-btn" data-id="' + item.id + '" aria-label="메시지 삭제">&times;</button>') +
-          '</div>' +
+        '<div class="guest-name">' + item.name + '</div>' +
+        '<div class="guest-head-right">' +
+        '<span>' + item.date + '</span>' +
+        (item.sample ? '' : '<button type="button" class="delete-entry-btn" data-id="' + item.id + '" aria-label="메시지 삭제">&times;</button>') +
+        '</div>' +
         '</div>' +
         '<div class="guest-text">' + item.text.replace(/\n/g, '<br>') + '</div>' +
-      '</div>';
+        '</div>';
     }).join('');
 
     pageLabel.textContent = currentPage + ' / ' + totalPages;
