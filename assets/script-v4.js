@@ -263,25 +263,28 @@ heroBg.style.height = 'auto';
     });
   }
 
-  var navButtons = document.querySelectorAll('.nav-btn');
+ var navButtons = document.querySelectorAll('.nav-btn');
 
   navButtons.forEach(function(button) {
     button.addEventListener('click', function() {
-      // 1. 버튼에 적힌 목적지 id 가져오기 (#location-section 등)
+      // 1. 버튼의 목적지 ID 가져오기 (#location-section 등)
       var targetId = this.getAttribute('data-target');
       var targetSection = document.querySelector(targetId);
 
-      // 2. 해당 목적지 구역이 화면에 존재한다면 부드럽게 스크롤
       if (targetSection) {
-        targetSection.scrollIntoView({
-          behavior: 'smooth', // 부드럽게 스크롤 되는 효과
-          block: 'start'      // 해당 구역의 최상단이 화면 맨 위에 걸치도록 이동
+        // 2. 해당 구역이 화면 최상단에서 얼마나 떨어져 있는지 절대 거리 계산
+        var targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+        
+        // 3. 브라우저 창 전체를 해당 높이 좌표로 부드럽게 스크롤
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
         });
       }
     });
   });
 
-  
+
   var guestbookData = loadGuestbook();
 
   function attachDeleteEvents() {
