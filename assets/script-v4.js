@@ -33,6 +33,30 @@
     heroBg.style.height = 'auto';
     heroBg.appendChild(videoEl);
   }
+  
+  // 🎵 배경음악 모바일 우회 자동재생 최종 버전
+  var audio = document.getElementById('wedding-audio');
+
+  function startWeddingBgm() {
+    if (audio && audio.paused) {
+      // 브라우저의 오디오 락을 해제하며 재생을 시도합니다.
+      audio.play().then(function() {
+        console.log("BGM 재생 성공!");
+        removeAudioEvents(); // 성공 시 중복 실행을 막기 위해 감시 종료
+      }).catch(function(error) {
+        console.log("터치 대기 중...", error);
+      });
+    }
+  }
+
+   function removeAudioEvents() {
+    document.removeEventListener('click', startWeddingBgm);
+    document.removeEventListener('touchstart', startWeddingBgm);
+  }
+
+  // 하객이 첫 스크롤을 내리거나 화면을 터치하는 순간 오디오 작동 시작
+  document.addEventListener('click', startWeddingBgm);
+  document.addEventListener('touchstart', startWeddingBgm);
 
   var galleryGrid = document.getElementById('gallery-grid');
   var galleryImages = Array.from({ length: 16 }, function (_, i) {
