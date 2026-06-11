@@ -623,12 +623,12 @@ section.is-visible {
   gap: 12px;
   min-height: 52px;
   border-top: 1px solid #eee6df;
-  font-size: 15px;
+  font-size: 14px;
   color: #564d47;
 }
 
 .copy-btn {
-  min-width: 132px;
+  min-width: 128px;
   height: 38px;
   border: 1px solid #d9d0c8;
   border-radius: 999px;
