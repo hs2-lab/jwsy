@@ -220,6 +220,7 @@
     if (!weddingAudio) {
       weddingAudio = new Audio('./assets/images/bgm.mp3');
       weddingAudio.loop = true; // 무한 반복 설정
+      weddingAudio.volume = 0.3; 
     }
 
     if (weddingAudio.paused) {
@@ -241,5 +242,5 @@
   document.addEventListener('click', startWeddingBgm);
   document.addEventListener('touchstart', startWeddingBgm);
 
-  
+
 })();
