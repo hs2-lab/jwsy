@@ -1126,3 +1126,48 @@ section.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
+/* 안내사항 섹션 스타일 */
+.wedding-notice-section {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.notice-container {
+  max-width: 450px;
+  margin: 30px auto 0;
+  text-align: left; /* 안내 내용은 왼쪽 정렬이 읽기 편합니다 */
+  padding: 0 10px;
+}
+
+.notice-item {
+  margin-bottom: 35px; /* 각 꼭지 사이의 여백 */
+  border-bottom: 1px dashed #e2ded8; /* 구분을 위한 부드러운 점선 */
+  padding-bottom: 20px;
+}
+
+.notice-item:last-child {
+  border-bottom: none; /* 마지막 항목은 점선 제거 */
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.item-title {
+  display: block;
+  font-size: 15px;
+  font-weight: bold;
+  color: #8c7365; /* 기존 청첩장의 브라운 시그니처 컬러 */
+  margin-bottom: 10px;
+}
+
+.item-desc {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #555555;
+  margin: 0;
+}
+
+.item-desc strong {
+  color: #333333;
+  font-weight: bold;
+}
