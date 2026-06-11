@@ -212,34 +212,88 @@
     });
   }
 
-    // 🎵 iOS / iPadOS 완벽 대응 배경음악 스크립트
   var weddingAudio = null;
 
-  function startWeddingBgm() {
-    // 최초 터치 시점에 오디오 객체를 메모리에 직접 생성하여 보안 락을 깹니다.
-    if (!weddingAudio) {
-      weddingAudio = new Audio('./assets/images/bgm.mp3');
-      weddingAudio.loop = true; // 무한 반복 설정
-      weddingAudio.volume = 0.1; 
-    }
-
-    if (weddingAudio.paused) {
-      weddingAudio.play().then(function() {
-        removeAudioEvents(); // 성공 시 이벤트 해제
-      }).catch(function(error) {
-    
-      });
-    }
+// 오디오 객체 생성 및 기본 설정 함수
+function initWeddingAudio() {
+  if (!weddingAudio) {
+    weddingAudio = new Audio('./assets/images/bgm.mp3');
+    weddingAudio.loop = true; // 무한 반복 설정
+    weddingAudio.volume = 0.05; 
   }
+}
 
-  function removeAudioEvents() {
-    document.removeEventListener('click', startWeddingBgm);
-    document.removeEventListener('touchstart', startWeddingBgm);
+// 화면 첫 터치/클릭 시 자동 재생되는 함수
+function startWeddingBgm() {
+  initWeddingAudio();
+
+  if (weddingAudio.paused) {
+    weddingAudio.play().then(function() {
+      removeAudioEvents(); // 자동 재생 성공 시 첫 터치 이벤트 해제
+      updateButtonUI(true); // 버튼 상태를 '재생 중'으로 변경
+    }).catch(function() {
+      // 자동 재생 차단 예외 처리
+    });
   }
+}
 
-  // 화면 터치 및 마우스 클릭 시 가동
-  document.addEventListener('click', startWeddingBgm);
-  document.addEventListener('touchstart', startWeddingBgm);
+// 자동 재생용 이벤트 리스너 제거
+function removeAudioEvents() {
+  document.removeEventListener('click', startWeddingBgm);
+  document.removeEventListener('touchstart', startWeddingBgm);
+}
+
+// 화면 터치 및 마우스 클릭 시 자동 재생 가동
+document.addEventListener('click', startWeddingBgm);
+document.addEventListener('touchstart', startWeddingBgm);
+
+
+/* =======================================================
+   [추가] 배경음악 ON/OFF 토글 버튼 제어 로직
+   ======================================================= */
+var musicBtn = document.getElementById('music-toggle-btn');
+var iconMute = musicBtn.querySelector('.icon-mute');
+var iconSound = musicBtn.querySelector('.icon-sound');
+
+// 버튼 모양(UI)을 상태에 따라 바꿔주는 공통 함수
+function updateButtonUI(isPlaying) {
+  if (isPlaying) {
+    musicBtn.classList.remove('music-off');
+    musicBtn.classList.add('music-on');
+    iconMute.style.display = 'none';
+    iconSound.style.display = 'block';
+    musicBtn.setAttribute('aria-label', '배경음악 끄기');
+  } else {
+    musicBtn.classList.remove('music-on');
+    musicBtn.classList.add('music-off');
+    iconMute.style.display = 'block';
+    iconSound.style.display = 'none';
+    musicBtn.setAttribute('aria-label', '배경음악 켜기');
+  }
+}
+
+// 사용자가 ON/OFF 버튼을 직접 클릭했을 때의 동작
+musicBtn.addEventListener('click', function(event) {
+  // 버튼 클릭이 상단의 document '자동 재생' 이벤트와 겹쳐 오작동하는 것을 방지
+  event.stopPropagation(); 
+  removeAudioEvents(); 
+
+  // 오디오 객체가 아직 없다면 생성
+  initWeddingAudio();
+
+  if (weddingAudio.paused) {
+    // 멈춰있다면 재생
+    weddingAudio.play().then(function() {
+      updateButtonUI(true);
+    }).catch(function() {
+      // 재생 실패 예외 처리
+    });
+  } else {
+    // 재생 중이라면 일시정지
+    weddingAudio.pause();
+    updateButtonUI(false);
+  }
+});
 
 
 })();

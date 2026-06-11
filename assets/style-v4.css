@@ -1173,3 +1173,43 @@ section.is-visible {
   -webkit-user-select: none;    /* 사진 꾹 눌러서 복사하는 기능 방지 */
   user-select: none;
 }
+
+/* 공통 플로팅 버튼 스타일 */
+.floating-btn {
+  position: fixed;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, background-color 0.2s;
+  z-index: 1000;
+}
+
+.floating-btn:hover {
+  transform: scale(1.05); /* 마우스 올렸을 때 살짝 커짐 */
+}
+
+/* 1. 카카오톡 공유 버튼 위치 */
+#kakao-share-btn {
+  bottom: 20px;
+  background-color: #FEE500; /* 카카오 시그니처 옐로우 */
+}
+
+#music-toggle-btn {
+  bottom: 80px; 
+}
+
+.music-off {
+  background-color: #757575;
+}
+
+/* 음악이 켜져있을 때 배경색 (포인트가 되는 에메랄드 또는 블루 계열) */
+.music-on {
+  background-color: #d8b8a0;
+}
