@@ -1037,3 +1037,80 @@ section.is-visible {
   object-fit: cover;     /* 1픽셀의 빈틈도 없이 꽉 채우기 */
   display: block;
 }
+
+/* 플로팅 버튼 기본 스타일 */
+.floating-btn {
+  position: fixed;
+  bottom: 24px; /* 하단 여백 */
+  right: 24px;  /* 우측 여백 */
+  width: 56px;
+  height: 56px;
+  background-color: #FEE500; /* 카카오 시그니처 옐로우 */
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* 다른 요소보다 항상 위에 노출 */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* 마우스 호버 효과 (PC용) */
+.floating-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* 모바일 화면 처리를 위한 미디어 쿼리 (반응형 대응) */
+@media (max-width: 480px) {
+  .floating-btn {
+    bottom: 16px; /* 모바일에서는 여백을 조금 줄여 손가락이 닿기 편하게 */
+    right: 16px;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* 네비게이션 바 전체 컨테이너 */
+.wedding-nav-bar {
+  display: flex;
+  justify-content: center;   /* 버튼들을 가운데로 모음 */
+  gap: 10px;                 /* 버튼 사이의 간격 */
+  max-width: 400px;
+  margin: 0px auto 20px auto;
+  padding: 0 16px;
+}
+
+/* 개별 버튼 디자인 (브라운 무드 반영) */
+.nav-btn {
+  flex: 1;                   /* 3개 버튼의 가로 크기를 균일하게 */
+  background-color: #ffffff; /* 깔끔한 화이트 배경 */
+  border: 1px solid #e1dedc; /* 메인 컬러(#8d857f)를 아주 연하게 연출한 테두리 선 */
+  border-radius: 20px;       /* 둥근 알약 모양으로 버튼 인지율 상승 */
+  font-size: 13.5px;
+  color: #8d857f;            /* 청첩장 시그니처 브라운 컬러 적용 */
+  padding: 11px 0;           /* 손가락으로 누르기 편하도록 위아래 볼륨감 제공 */
+  cursor: pointer;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  box-shadow: 0 2px 6px rgba(141, 133, 127, 0.04); /* 메인 컬러 톤의 은은한 그림자 */
+  transition: all 0.2s ease;
+}
+
+/* 버튼을 터치하거나 마우스를 올렸을 때의 세련된 반전 효과 */
+.nav-btn:hover, .nav-btn:active {
+  background-color: #8d857f; /* 배경이 메인 브라운 컬러로 바뀜 */
+  border-color: #8d857f;
+  color: #ffffff;            /* 글자색은 선명한 화이트로 전환 */
+  font-weight: 600;
+}
+
+/* 하단 구분선 (기존보다 더 연하게 처리하여 버튼을 돋보이게 함) */
+.nav-divider {
+  border: none;
+  border-top: 1px solid #f3f1f0;
+  max-width: 100%;
+  margin: 10px 0 35px 0;
+}

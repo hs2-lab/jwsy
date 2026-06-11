@@ -24,6 +24,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/style-v4.css?v=20260527-1" />
+
+<script src="https://kakaocdn.net" 
+        integrity="sha384-0rrSVN9BF96dYc7STgUN9LaJHr9n9Q8bLAnc3697eKpZt2Dq6Z3F1eN/31O" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -36,14 +39,30 @@
     </div>
   </section>
 
+  <!-- 플로팅 공유 버튼 -->
+<button id="kakao-share-btn" class="floating-btn" aria-label="카카오톡 공유하기">
+  <!-- 카카오톡 말풍선 아이콘 (SVG 고화질) -->
+  <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="28" height="28">
+    <path fill="#3A1D1D" d="M12 3c-5.523 0-10 3.582-10 8 0 2.947 2.014 5.525 5.022 6.94l-1.02 3.736c-.1.368.32.658.64.446l4.414-2.923c.307.034.62.053.944.053 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/>
+  </svg>
+</button>
+
   <section class="intro-family-section">
     <div class="section-block intro-block">
-      <div style="text-align: center; margin-bottom: 30px;">
+      <div style="text-align: center; margin-bottom: 10px;">
         <p class="hero-date">2026년 8월 22일 토요일 오전 11시</p>
         <p class="hero-place">더컨벤션 잠실(교통회관) 1층 그랜드볼룸홀</p>
       </div>
     </div>
+
+      <nav class="wedding-nav-bar">
+  <button class="nav-btn" data-target="#location-section">오시는길</button>
+  <button class="nav-btn" data-target="#gallery-section">사진</button>
+  <button class="nav-btn" data-target="#heart-section">연락처</button>
+
   </section>
+
+</nav>
 
   <section class="intro-family-section">
     <div class="section-block intro-block">
@@ -211,8 +230,31 @@
       <div class="directions-card">
         <div class="directions-label">주차</div>
         <div class="directions-text">
-          더컨벤션 잠실(교통회관) 주차장 이용<br />
+          더컨벤션 잠실(교통회관) 지상·지하 주차장 이용<br />
           2시간 무료 주차
+        </div>
+      </div>
+
+      <div class="directions-card">
+        <div class="directions-label">안내사항</div>
+        <div class="directions-text">
+         <!-- 첫 번째 항목 -->
+        <div class="notice-item">
+            <span class="item-title">📍 연회장 위치</span>
+            <p class="item-desc">지하 1층 (건물 입구 로비 엘리베이터 및 계단 이용)</p>
+        </div>
+        
+        <!-- 두 번째 항목 -->
+        <div class="notice-item">
+            <span class="item-title">🍽️ 식사 시간</span>
+            <p class="item-desc">예식 시작 30분 전부터 가능합니다.<br>연회장 내 음료와 주류는 자유롭게 이용 가능합니다.</p>
+        </div>
+        
+        <!-- 세 번째 항목 -->
+        <div class="notice-item">
+            <span class="item-title">👶 어린이 식권 안내</span>
+            <p class="item-desc">만 5세 이하 : 무료 입장<br>5세 ~ 7세 : 어린이 식권 요청 필수</p>
+        </div>
         </div>
       </div>
     </div>
@@ -241,8 +283,8 @@
           </summary>
           <div class="account-panel">
             <div class="account-line">
-              <span>OO은행 123-456-789012</span>
-              <button type="button" class="copy-btn" data-copy="OO은행 123-456-789012">계좌번호 복사하기</button>
+              <span>우리은행 1002-129-462286</span>
+              <button type="button" class="copy-btn" data-copy="우리은행 1002-129-462286">계좌번호 복사하기</button>
             </div>
           </div>
         </details>
@@ -251,15 +293,15 @@
           <summary>
             <span>혼주 정완순</span>
             <span class="summary-actions">
-              <a href="tel:010-0000-0000" class="icon-btn" aria-label="혼주에게 전화" onclick="event.stopPropagation()">☎</a>
-              <a href="sms:010-0000-0000" class="icon-btn" aria-label="혼주에게 문자" onclick="event.stopPropagation()">✉</a>
+              <a href="tel:010-7326-2207" class="icon-btn" aria-label="혼주에게 전화" onclick="event.stopPropagation()">☎</a>
+              <a href="sms:010-7326-2207" class="icon-btn" aria-label="혼주에게 문자" onclick="event.stopPropagation()">✉</a>
               <span class="summary-arrow" aria-hidden="true"></span>
             </span>
           </summary>
           <div class="account-panel">
             <div class="account-line">
-              <span>OO은행 123-456-789012</span>
-              <button type="button" class="copy-btn" data-copy="OO은행 123-456-789012">계좌번호 복사하기</button>
+              <span>국민은행 096-21-0106-494</span>
+              <button type="button" class="copy-btn" data-copy="국민은행 096-21-0106-494">계좌번호 복사하기</button>
             </div>
           </div>
         </details>
@@ -268,15 +310,15 @@
           <summary>
             <span>혼주 이희란</span>
             <span class="summary-actions">
-              <a href="tel:010-0000-0000" class="icon-btn" aria-label="혼주에게 전화" onclick="event.stopPropagation()">☎</a>
-              <a href="sms:010-0000-0000" class="icon-btn" aria-label="혼주에게 문자" onclick="event.stopPropagation()">✉</a>
+              <a href="tel:010-3044-8225" class="icon-btn" aria-label="혼주에게 전화" onclick="event.stopPropagation()">☎</a>
+              <a href="sms:010-3044-8225" class="icon-btn" aria-label="혼주에게 문자" onclick="event.stopPropagation()">✉</a>
               <span class="summary-arrow" aria-hidden="true"></span>
             </span>
           </summary>
           <div class="account-panel">
             <div class="account-line">
-              <span>OO은행 123-456-789012</span>
-              <button type="button" class="copy-btn" data-copy="OO은행 123-456-789012">계좌번호 복사하기</button>
+              <span>우리은행 1002-251-791060</span>
+              <button type="button" class="copy-btn" data-copy="우리은행 1002-251-791060">계좌번호 복사하기</button>
             </div>
           </div>
         </details>
@@ -294,8 +336,8 @@
           </summary>
           <div class="account-panel">
             <div class="account-line">
-              <span>OO은행 123-456-789012</span>
-              <button type="button" class="copy-btn" data-copy="OO은행 123-456-789012">계좌번호 복사하기</button>
+              <span>농협 204040-56-198951</span>
+              <button type="button" class="copy-btn" data-copy="농협 204040-56-198951">계좌번호 복사하기</button>
             </div>
           </div>
         </details>
@@ -311,8 +353,8 @@
           </summary>
           <div class="account-panel">
             <div class="account-line">
-              <span>OO은행 123-456-789012</span>
-              <button type="button" class="copy-btn" data-copy="OO은행 123-456-789012">계좌번호 복사하기</button>
+              <span>농협 352-0319-4517-63</span>
+              <button type="button" class="copy-btn" data-copy="농협 352-0319-4517-63">계좌번호 복사하기</button>
             </div>
           </div>
         </details>
@@ -328,8 +370,8 @@
           </summary>
           <div class="account-panel">
             <div class="account-line">
-              <span>OO은행 123-456-789012</span>
-              <button type="button" class="copy-btn" data-copy="OO은행 123-456-789012">계좌번호 복사하기</button>
+              <span>농협 204040-56-007249</span>
+              <button type="button" class="copy-btn" data-copy="농협 204040-56-007249">계좌번호 복사하기</button>
             </div>
           </div>
         </details>
