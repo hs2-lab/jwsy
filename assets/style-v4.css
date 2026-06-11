@@ -1114,3 +1114,15 @@ section.is-visible {
   max-width: 100%;
   margin: 10px 0 35px 0;
 }
+/* 기본 상태: 아래로 15px 내려가 있고 투명함 */
+.wedding-nav-bar .nav-btn {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* 활성화 상태: 제자리로 돌아오고 선명해짐 */
+.wedding-nav-bar .nav-btn.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

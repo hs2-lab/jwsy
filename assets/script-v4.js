@@ -147,6 +147,19 @@
       observer.observe(section);
     }
   });
+  
+  // 페이지 로딩이 완료되면 네비게이션 버튼 애니메이션을 바로 실행합니다.
+window.addEventListener('DOMContentLoaded', function() {
+  var navButtons = document.querySelectorAll('.wedding-nav-bar .nav-btn');
+  
+  navButtons.forEach(function(btn, index) {
+    // 0.2초(200ms) 정도 살짝 대기했다가 좌측부터 순서대로 0.1초 시차를 두고 슥 올라옵니다.
+    setTimeout(function() {
+      btn.classList.add('is-visible');
+    }, 200 + (index * 100)); 
+  });
+});
+
 
   var sampleMessages = [
     { id: 's1', name: 'ㅎㅎㅎ', date: '2026.05.25', text: '결혼 축하해요 ♥', sample: true }
@@ -220,22 +233,22 @@
   }
 
 
-// 1. 카카오 SDK 초기화 (중복 초기화 방지)
+  // 1. 카카오 SDK 초기화 (중복 초기화 방지)
   if (typeof Kakao !== 'undefined' && !Kakao.isInitialized()) {
-    Kakao.init('32599aff7bd9dd685d2d1ba374b08f7b'); 
+    Kakao.init('32599aff7bd9dd685d2d1ba374b08f7b');
   }
 
 
   // 2. 버튼 클릭 이벤트 리스너 등록
   var kakaoBtn = document.getElementById('kakao-share-btn');
-  
+
   if (kakaoBtn) {
-    kakaoBtn.addEventListener('click', function() {
+    kakaoBtn.addEventListener('click', function () {
       if (typeof Kakao !== 'undefined') {
-        
+
         // 카카오톡 공유 - 위치 템플릿 호출
         Kakao.Share.sendDefault({
-          objectType: 'location', // 위치 템플릿 필수 지정
+          objectType: 'feed', // 위치 템플릿 필수 지정
           address: '서울 송파구 올림픽로 319', // [필수] 실제 예식장 도로명/지번 주소
           addressTitle: '더컨벤션 잠실(교통회관) 1층 그랜드볼룸홀', // [선택] 카카오톡 지도 뷰 상단에 표시될 식장 이름
           content: {
@@ -245,18 +258,26 @@
             imageWidth: 600, // [선택] 이미지 너비 (픽셀)
             imageHeight: 720, // [선택] 이미지 높이 (픽셀)
             link: {
-              mobileWebUrl: window.location.href, // [필수] 클릭 시 청첩장 주소로 이동
-              webUrl: window.location.href,       // [필수] PC용 링크
+              mobileWebUrl: 'https://hs2-lab.github.io/jwsy/',
+              webUrl: 'https://hs2-lab.github.io/jwsy/',
             },
           },
           buttons: [
             {
-              title: '모바일 청첩장 보기', // 사용자 정의 버튼 이름
+              title: '모바일 청첩장', // 좌측 첫 번째 버튼
               link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href,
+                mobileWebUrl: 'https://hs2-lab.github.io/jwsy/',
+                webUrl: 'https://hs2-lab.github.io/jwsy/',
               },
-            }
+            },
+            {
+              title: '위치 보기', // 우측 두 번째 버튼
+              link: {
+                // 더컨벤션 잠실점 카카오맵 위치로 바로 연결되는 실제 주소입니다.
+                mobileWebUrl: 'https://kakao.com 잠실점,37.51475,127.10304',
+                webUrl: 'https://kakao.com 잠실점,37.51475,127.10304',
+              },
+            },
           ],
         });
 
