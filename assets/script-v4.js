@@ -190,11 +190,8 @@
   ];
 
   var STORAGE_KEY = 'wedding_guestbook_local_v6';
-  var guestForm = document.getElementById('guest-form');
-  var guestbookList = document.getElementById('guestbook-list');
   var prevPageBtn = document.getElementById('prev-page');
   var nextPageBtn = document.getElementById('next-page');
-  var pageLabel = document.getElementById('guestbook-page');
   var openMessageModalBtn = document.getElementById('open-message-modal');
   var messageModal = document.getElementById('message-modal');
   var messageModalDim = document.getElementById('message-modal-dim');
@@ -252,11 +249,6 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   }
 
-  function loadGuestbook() {
-    return [].concat(loadStoredMessages(), sampleMessages);
-  }
-
-
   // 1. 카카오 SDK 초기화 (중복 초기화 방지)
   if (typeof Kakao !== 'undefined' && !Kakao.isInitialized()) {
     Kakao.init('32599aff7bd9dd685d2d1ba374b08f7b');
@@ -300,8 +292,6 @@
   });
 
 
-  var guestbookData = loadGuestbook();
-
   function attachDeleteEvents() {
     var deleteButtons = Array.from(document.querySelectorAll('.delete-entry-btn'));
     deleteButtons.forEach(function (button) {
@@ -310,118 +300,6 @@
         if (!id) return;
         openDeleteModal(id);
       });
-    });
-  }
-
-  function renderGuestbook() {
-    var totalPages = Math.max(1, Math.ceil(guestbookData.length / pageSize));
-    if (currentPage > totalPages) currentPage = totalPages;
-
-    var start = (currentPage - 1) * pageSize;
-    var visible = guestbookData.slice(start, start + pageSize);
-
-    guestbookList.innerHTML = visible.map(function (item) {
-      return '<div class="guest-entry">' +
-        '<div class="guest-head">' +
-        '<div class="guest-name">' + item.name + '</div>' +
-        '<div class="guest-head-right">' +
-        '<span>' + item.date + '</span>' +
-        (item.sample ? '' : '<button type="button" class="delete-entry-btn" data-id="' + item.id + '" aria-label="메시지 삭제">&times;</button>') +
-        '</div>' +
-        '</div>' +
-        '<div class="guest-text">' + item.text.replace(/\n/g, '<br>') + '</div>' +
-        '</div>';
-    }).join('');
-
-    pageLabel.textContent = currentPage + ' / ' + totalPages;
-    prevPageBtn.disabled = currentPage === 1;
-    nextPageBtn.disabled = currentPage === totalPages;
-    attachDeleteEvents();
-  }
-
-  if (guestForm) {
-  guestForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    var name = guestForm.name.value.trim();
-    var password = guestForm.password.value.trim();
-    var message = guestForm.message.value.trim();
-
-    if (!name || !password || !message) return;
-
-    // 1. 기존 저장된 글 데이터 가져오기
-    var stored = loadStoredMessages();
-    
-    // 2. 새 글 객체 생성 (renderGuestbook과 일치하도록 text로 저장)
-    var newEntry = {
-      id: Date.now().toString(36),
-      name: name,
-      password: password,
-      text: message, // 👈 중요: message 대신 text로 명칭을 통일하여 매칭 오류 해결!
-      date: new Date().toLocaleDateString('ko-KR').replace(/\./g, '.').replace(/\s/g, '')
-    };
-
-    // 3. 배열 맨 앞에 새 글 추가
-    stored.unshift(newEntry);
-
-    // 4. 로컬 스토리지에 최종 저장
-    saveStoredMessages(stored);
-    
-    // 5. 화면 데이터 갱신 및 첫 페이지로 리셋
-    guestbookData = loadGuestbook(); // 전체 데이터를 동기화하여 불러옵니다.
-    currentPage = 1;
-    
-    // 6. 새로고침 없이 화면 즉시 다시 그리기
-    renderGuestbook();
-    
-    // 7. 입력창 비우고 모달 닫기
-    guestForm.reset();
-    closeMessageModal();
-  });
-}
-
-  if (confirmDeleteBtn) {
-    confirmDeleteBtn.addEventListener('click', function () {
-      var password = deletePasswordInput.value.trim();
-      if (!deleteTargetId || !password) return;
-
-      var stored = loadStoredMessages();
-      var target = stored.find(function (item) { return item.id === deleteTargetId; });
-
-      if (!target) {
-        closeDeleteModal();
-        return;
-      }
-
-      if (target.password !== password) {
-        alert('비밀번호가 일치하지 않습니다.');
-        return;
-      }
-
-      var nextStored = stored.filter(function (item) { return item.id !== deleteTargetId; });
-      saveStoredMessages(nextStored);
-      guestbookData = loadGuestbook();
-      renderGuestbook();
-      closeDeleteModal();
-    });
-  }
-
-  if (prevPageBtn) {
-    prevPageBtn.addEventListener('click', function () {
-      if (currentPage > 1) {
-        currentPage -= 1;
-        renderGuestbook();
-      }
-    });
-  }
-
-  if (nextPageBtn) {
-    nextPageBtn.addEventListener('click', function () {
-      var totalPages = Math.max(1, Math.ceil(guestbookData.length / pageSize));
-      if (currentPage < totalPages) {
-        currentPage += 1;
-        renderGuestbook();
-      }
     });
   }
 
@@ -452,5 +330,4 @@
     });
   });
 
-  renderGuestbook();
 })();
