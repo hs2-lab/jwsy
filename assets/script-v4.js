@@ -255,8 +255,8 @@ window.addEventListener('DOMContentLoaded', function() {
             title: '지운♡송이 결혼합니다', // [필수] 메시지 대제목
             description: '2026년 8월 22일 11시, 오시는 길과 상세 안내를 확인해 보세요.', // [필수] 상세 설명
             imageUrl: 'https://hs2-lab.github.io/jwsy/assets/images/hero/thn.jpg', // [필수] 메인 사진 URL
-            imageWidth: 600, // [선택] 이미지 너비 (픽셀)
-            imageHeight: 720, // [선택] 이미지 높이 (픽셀)
+            imageWidth: 500, // [선택] 이미지 너비 (픽셀)
+            imageHeight: 500, // [선택] 이미지 높이 (픽셀)
             link: {
               mobileWebUrl: 'https://hs2-lab.github.io/jwsy/',
               webUrl: 'https://hs2-lab.github.io/jwsy/',
