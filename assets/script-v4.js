@@ -316,32 +316,45 @@
   }
 
   if (guestForm) {
-    guestForm.addEventListener('submit', function (e) {
-      e.preventDefault();
+  guestForm.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-      var name = guestForm.name.value.trim();
-      var password = guestForm.password.value.trim();
-      var message = guestForm.message.value.trim();
+    var name = guestForm.name.value.trim();
+    var password = guestForm.password.value.trim();
+    var message = guestForm.message.value.trim();
 
-      if (!name || !password || !message) return;
+    if (!name || !password || !message) return;
 
-      var stored = loadStoredMessages();
-      stored.unshift({
-        id: Date.now().toString(36),
-        name: name,
-        password: password,
-        message: message,
-        date: new Date().toLocaleDateString('ko-KR').replace(/\./g, '.').replace(/\s/g, '')
-      });
+    // 1. 기존 저장된 글 데이터 가져오기
+    var stored = loadStoredMessages();
+    
+    // 2. 새 글 객체 생성 (renderGuestbook과 일치하도록 text로 저장)
+    var newEntry = {
+      id: Date.now().toString(36),
+      name: name,
+      password: password,
+      text: message, // 👈 중요: message 대신 text로 명칭을 통일하여 매칭 오류 해결!
+      date: new Date().toLocaleDateString('ko-KR').replace(/\./g, '.').replace(/\s/g, '')
+    };
 
-      saveStoredMessages(stored);
-      guestbookData = loadGuestbook();
-      currentPage = 1;
-      renderGuestbook();
-      guestForm.reset();
-      closeMessageModal();
-    });
-  }
+    // 3. 배열 맨 앞에 새 글 추가
+    stored.unshift(newEntry);
+
+    // 4. 로컬 스토리지에 최종 저장
+    saveStoredMessages(stored);
+    
+    // 5. 화면 데이터 갱신 및 첫 페이지로 리셋
+    guestbookData = loadGuestbook(); // 전체 데이터를 동기화하여 불러옵니다.
+    currentPage = 1;
+    
+    // 6. 새로고침 없이 화면 즉시 다시 그리기
+    renderGuestbook();
+    
+    // 7. 입력창 비우고 모달 닫기
+    guestForm.reset();
+    closeMessageModal();
+  });
+}
 
   if (confirmDeleteBtn) {
     confirmDeleteBtn.addEventListener('click', function () {
