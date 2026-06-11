@@ -247,30 +247,33 @@ window.addEventListener('DOMContentLoaded', function() {
     if (typeof Kakao !== 'undefined') {
 
       // 깔끔하고 직관적인 피드(feed) 템플릿 호출
-      Kakao.Share.sendDefault({
-        objectType: 'feed', 
-        content: {
-          title: '지운 ♡ 송이 결혼합니다', 
-          description: '2026년 8월 22일 11시, 더컨벤션 잠실(교통회관) 1층 그랜드볼룸홀', 
-          imageUrl: 'https://hs2-lab.github.io/jwsy/assets/images/hero/thn.jpg', 
-          imageWidth: 500, 
-          imageHeight: 500, 
-          link: {
-            mobileWebUrl: 'https://hs2-lab.github.io/jwsy/',
-            webUrl: 'https://hs2-lab.github.io/jwsy/',
-          },
-        },
-        buttons: [
-          {
-            title: '모바일 청첩장', 
-            link: {
-              mobileWebUrl: 'https://hs2-lab.github.io/jwsy/',
-              webUrl: 'https://hs2-lab.github.io/jwsy/',
-            },
-          }
-        ],
-      });
+      // Kakao.Share.sendDefault({
+      //   objectType: 'feed', 
+      //   content: {
+      //     title: '지운 ♡ 송이 결혼합니다', 
+      //     description: '2026년 8월 22일 11시, 더컨벤션 잠실(교통회관) 1층 그랜드볼룸홀', 
+      //     imageUrl: 'https://hs2-lab.github.io/jwsy/assets/images/hero/thn.jpg', 
+      //     imageWidth: 500, 
+      //     imageHeight: 500, 
+      //     link: {
+      //       mobileWebUrl: 'https://hs2-lab.github.io/jwsy/',
+      //       webUrl: 'https://hs2-lab.github.io/jwsy/',
+      //     },
+      //   },
+      //   buttons: [
+      //     {
+      //       title: '모바일 청첩장', 
+      //       link: {
+      //         mobileWebUrl: 'https://hs2-lab.github.io/jwsy/',
+      //         webUrl: 'https://hs2-lab.github.io/jwsy/',
+      //       },
+      //     }
+      //   ],
+      // });
 
+      Kakao.Share.sendCustom({
+        templateId: 134256, // 👈 카카오 빌더가 발급해 준 6자리 숫자를 여기에 적습니다.
+      });
     }
   });
 }
