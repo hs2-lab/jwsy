@@ -147,18 +147,18 @@
       observer.observe(section);
     }
   });
-  
+
   // 페이지 로딩이 완료되면 네비게이션 버튼 애니메이션을 바로 실행합니다.
-window.addEventListener('DOMContentLoaded', function() {
-  var navButtons = document.querySelectorAll('.wedding-nav-bar .nav-btn');
-  
-  navButtons.forEach(function(btn, index) {
-    // 0.2초(200ms) 정도 살짝 대기했다가 좌측부터 순서대로 0.1초 시차를 두고 슥 올라옵니다.
-    setTimeout(function() {
-      btn.classList.add('is-visible');
-    }, 200 + (index * 100)); 
+  window.addEventListener('DOMContentLoaded', function () {
+    var navButtons = document.querySelectorAll('.wedding-nav-bar .nav-btn');
+
+    navButtons.forEach(function (btn, index) {
+      // 0.2초(200ms) 정도 살짝 대기했다가 좌측부터 순서대로 0.1초 시차를 두고 슥 올라옵니다.
+      setTimeout(function () {
+        btn.classList.add('is-visible');
+      }, 200 + (index * 100));
+    });
   });
-});
 
 
   var sampleMessages = [
@@ -242,41 +242,16 @@ window.addEventListener('DOMContentLoaded', function() {
   // 2. 버튼 클릭 이벤트 리스너 등록
   var kakaoBtn = document.getElementById('kakao-share-btn');
 
- if (kakaoBtn) {
-  kakaoBtn.addEventListener('click', function () {
-    if (typeof Kakao !== 'undefined') {
+  if (kakaoBtn) {
+    kakaoBtn.addEventListener('click', function () {
+      if (typeof Kakao !== 'undefined') {
 
-      // 깔끔하고 직관적인 피드(feed) 템플릿 호출
-      // Kakao.Share.sendDefault({
-      //   objectType: 'feed', 
-      //   content: {
-      //     title: '지운 ♡ 송이 결혼합니다', 
-      //     description: '2026년 8월 22일 11시, 더컨벤션 잠실(교통회관) 1층 그랜드볼룸홀', 
-      //     imageUrl: 'https://hs2-lab.github.io/jwsy/assets/images/hero/thn.jpg', 
-      //     imageWidth: 500, 
-      //     imageHeight: 500, 
-      //     link: {
-      //       mobileWebUrl: 'https://hs2-lab.github.io/jwsy/',
-      //       webUrl: 'https://hs2-lab.github.io/jwsy/',
-      //     },
-      //   },
-      //   buttons: [
-      //     {
-      //       title: '모바일 청첩장', 
-      //       link: {
-      //         mobileWebUrl: 'https://hs2-lab.github.io/jwsy/',
-      //         webUrl: 'https://hs2-lab.github.io/jwsy/',
-      //       },
-      //     }
-      //   ],
-      // });
-
-      Kakao.Share.sendCustom({
-        templateId: 134256, // 👈 카카오 빌더가 발급해 준 6자리 숫자를 여기에 적습니다.
-      });
-    }
-  });
-}
+        Kakao.Share.sendCustom({
+          templateId: 134256,
+        });
+      }
+    });
+  }
 
 
   var navButtons = document.querySelectorAll('.nav-btn');
