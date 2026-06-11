@@ -220,15 +220,14 @@
     if (!weddingAudio) {
       weddingAudio = new Audio('./assets/images/bgm.mp3');
       weddingAudio.loop = true; // 무한 반복 설정
-      weddingAudio.volume = 0.3; 
+      weddingAudio.volume = 0.1; 
     }
 
     if (weddingAudio.paused) {
       weddingAudio.play().then(function() {
-        console.log("👉 iOS BGM 재생 성공!");
         removeAudioEvents(); // 성공 시 이벤트 해제
       }).catch(function(error) {
-        console.log("👉 재생 대기 중:", error);
+    
       });
     }
   }
