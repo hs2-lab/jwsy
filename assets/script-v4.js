@@ -267,15 +267,7 @@ window.addEventListener('DOMContentLoaded', function() {
               mobileWebUrl: 'https://hs2-lab.github.io/jwsy/',
               webUrl: 'https://hs2-lab.github.io/jwsy/',
             },
-          },
-          {
-            title: '위치 보기', 
-            link: {
-              // 더컨벤션 잠실점 카카오맵 공식 바로가기 주소입니다.
-              mobileWebUrl: 'https://kakao.com 잠실점,37.51475,127.10304',
-              webUrl: 'https://kakao.com 잠실점,37.51475,127.10304',
-            },
-          },
+          }
         ],
       });
 
