@@ -242,48 +242,46 @@ window.addEventListener('DOMContentLoaded', function() {
   // 2. 버튼 클릭 이벤트 리스너 등록
   var kakaoBtn = document.getElementById('kakao-share-btn');
 
-  if (kakaoBtn) {
-    kakaoBtn.addEventListener('click', function () {
-      if (typeof Kakao !== 'undefined') {
+ if (kakaoBtn) {
+  kakaoBtn.addEventListener('click', function () {
+    if (typeof Kakao !== 'undefined') {
 
-        // 카카오톡 공유 - 위치 템플릿 호출
-        Kakao.Share.sendDefault({
-          objectType: 'feed', // 위치 템플릿 필수 지정
-          address: '서울 송파구 올림픽로 319', // [필수] 실제 예식장 도로명/지번 주소
-          addressTitle: '더컨벤션 잠실(교통회관) 1층 그랜드볼룸홀', // [선택] 카카오톡 지도 뷰 상단에 표시될 식장 이름
-          content: {
-            title: '지운♡송이 결혼합니다', // [필수] 메시지 대제목
-            description: '2026년 8월 22일 11시, 오시는 길과 상세 안내를 확인해 보세요.', // [필수] 상세 설명
-            imageUrl: 'https://hs2-lab.github.io/jwsy/assets/images/hero/thn.jpg', // [필수] 메인 사진 URL
-            imageWidth: 500, // [선택] 이미지 너비 (픽셀)
-            imageHeight: 500, // [선택] 이미지 높이 (픽셀)
+      // 깔끔하고 직관적인 피드(feed) 템플릿 호출
+      Kakao.Share.sendDefault({
+        objectType: 'feed', 
+        content: {
+          title: '지운 ♡ 송이 결혼합니다', 
+          description: '2026년 8월 22일 11시, 더컨벤션 잠실(교통회관) 1층 그랜드볼룸홀', 
+          imageUrl: 'https://hs2-lab.github.io/jwsy/assets/images/hero/thn.jpg', 
+          imageWidth: 500, 
+          imageHeight: 500, 
+          link: {
+            mobileWebUrl: 'https://hs2-lab.github.io/jwsy/',
+            webUrl: 'https://hs2-lab.github.io/jwsy/',
+          },
+        },
+        buttons: [
+          {
+            title: '모바일 청첩장', 
             link: {
               mobileWebUrl: 'https://hs2-lab.github.io/jwsy/',
               webUrl: 'https://hs2-lab.github.io/jwsy/',
             },
           },
-          buttons: [
-            {
-              title: '모바일 청첩장', // 좌측 첫 번째 버튼
-              link: {
-                mobileWebUrl: 'https://hs2-lab.github.io/jwsy/',
-                webUrl: 'https://hs2-lab.github.io/jwsy/',
-              },
+          {
+            title: '위치 보기', 
+            link: {
+              // 더컨벤션 잠실점 카카오맵 공식 바로가기 주소입니다.
+              mobileWebUrl: 'https://kakao.com 잠실점,37.51475,127.10304',
+              webUrl: 'https://kakao.com 잠실점,37.51475,127.10304',
             },
-            {
-              title: '위치 보기', // 우측 두 번째 버튼
-              link: {
-                // 더컨벤션 잠실점 카카오맵 위치로 바로 연결되는 실제 주소입니다.
-                mobileWebUrl: 'https://kakao.com 잠실점,37.51475,127.10304',
-                webUrl: 'https://kakao.com 잠실점,37.51475,127.10304',
-              },
-            },
-          ],
-        });
+          },
+        ],
+      });
 
-      }
-    });
-  }
+    }
+  });
+}
 
 
   var navButtons = document.querySelectorAll('.nav-btn');
