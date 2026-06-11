@@ -1168,3 +1168,8 @@ section.is-visible {
   color: #333333;
   font-weight: bold;
 }
+.lightbox, .lightbox-photo {
+  touch-action: none !important; /* 핀치 줌, 더블 탭 확대 기능 원천 차단 */
+  -webkit-user-select: none;    /* 사진 꾹 눌러서 복사하는 기능 방지 */
+  user-select: none;
+}
