@@ -409,6 +409,16 @@
     </div>
   </section>
 
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightbox-close" aria-label="닫기">×</button>
+    <button class="lightbox-arrow left" id="lightbox-prev" aria-label="이전 이미지"><span></span></button>
+    <div class="lightbox-content">
+      <!-- ⚠️ 자바스크립트가 찾는 핵심 ID 'lightbox-photo'가 여기에 있어야 합니다 -->
+      <img class="lightbox-photo" id="lightbox-photo" src="" alt="갤러리 이미지 확대 보기" />
+    </div>
+    <button class="lightbox-arrow right" id="lightbox-next" aria-label="다음 이미지"><span></span></button>
+  </div>
+
   <footer class="page-footer">
     <p class="page-footer-text">
       소중한 걸음에 감사드리며<br />

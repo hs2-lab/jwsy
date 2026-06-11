@@ -926,7 +926,6 @@ section.is-visible {
   width: 40px;
   height: 40px;
   border-radius: 999px;
-  background: rgba(255,255,255,.12);
   color: #fff;
   font-size: 28px;
 }
@@ -938,8 +937,6 @@ section.is-visible {
   width: 44px;
   height: 44px;
   border-radius: 999px;
-  background: rgba(255,255,255,.1);
-  border: 1px solid rgba(255,255,255,.18);
   display: flex;
   align-items: center;
   justify-content: center;
