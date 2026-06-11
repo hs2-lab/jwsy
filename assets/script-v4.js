@@ -220,6 +220,51 @@
   }
 
 
+// 1. 카카오 SDK 초기화 (중복 초기화 방지)
+  if (typeof Kakao !== 'undefined' && !Kakao.isInitialized()) {
+    Kakao.init('32599aff7bd9dd685d2d1ba374b08f7b'); 
+  }
+
+
+  // 2. 버튼 클릭 이벤트 리스너 등록
+  var kakaoBtn = document.getElementById('kakao-share-btn');
+  
+  if (kakaoBtn) {
+    kakaoBtn.addEventListener('click', function() {
+      if (typeof Kakao !== 'undefined') {
+        
+        // 카카오톡 공유 - 위치 템플릿 호출
+        Kakao.Share.sendDefault({
+          objectType: 'location', // 위치 템플릿 필수 지정
+          address: '서울 송파구 올림픽로 319', // [필수] 실제 예식장 도로명/지번 주소
+          addressTitle: '더컨벤션 잠실(교통회관) 1층 그랜드볼룸홀', // [선택] 카카오톡 지도 뷰 상단에 표시될 식장 이름
+          content: {
+            title: '지운♡송이 결혼합니다', // [필수] 메시지 대제목
+            description: '2026년 8월 22일 11시, 오시는 길과 상세 안내를 확인해 보세요.', // [필수] 상세 설명
+            imageUrl: 'https://hs2-lab.github.io/jwsy/assets/images/hero/thn.jpg', // [필수] 메인 사진 URL
+            imageWidth: 600, // [선택] 이미지 너비 (픽셀)
+            imageHeight: 720, // [선택] 이미지 높이 (픽셀)
+            link: {
+              mobileWebUrl: window.location.href, // [필수] 클릭 시 청첩장 주소로 이동
+              webUrl: window.location.href,       // [필수] PC용 링크
+            },
+          },
+          buttons: [
+            {
+              title: '모바일 청첩장 보기', // 사용자 정의 버튼 이름
+              link: {
+                mobileWebUrl: window.location.href,
+                webUrl: window.location.href,
+              },
+            }
+          ],
+        });
+
+      }
+    });
+  }
+
+
   var navButtons = document.querySelectorAll('.nav-btn');
 
   navButtons.forEach(function (button) {
