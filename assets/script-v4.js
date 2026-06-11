@@ -33,23 +33,23 @@
     heroBg.style.height = 'auto';
     heroBg.appendChild(videoEl);
   }
-  
+
   // 🎵 배경음악 모바일 우회 자동재생 최종 버전
   var audio = document.getElementById('wedding-audio');
 
   function startWeddingBgm() {
     if (audio && audio.paused) {
       // 브라우저의 오디오 락을 해제하며 재생을 시도합니다.
-      audio.play().then(function() {
+      audio.play().then(function () {
         console.log("BGM 재생 성공!");
         removeAudioEvents(); // 성공 시 중복 실행을 막기 위해 감시 종료
-      }).catch(function(error) {
+      }).catch(function (error) {
         console.log("터치 대기 중...", error);
       });
     }
   }
 
-   function removeAudioEvents() {
+  function removeAudioEvents() {
     document.removeEventListener('click', startWeddingBgm);
     document.removeEventListener('touchstart', startWeddingBgm);
   }
@@ -172,88 +172,10 @@
     }
   });
 
-  // 페이지 로딩이 완료되면 네비게이션 버튼 애니메이션을 바로 실행합니다.
-  window.addEventListener('DOMContentLoaded', function () {
-    var navButtons = document.querySelectorAll('.wedding-nav-bar .nav-btn');
-
-    navButtons.forEach(function (btn, index) {
-      // 0.2초(200ms) 정도 살짝 대기했다가 좌측부터 순서대로 0.1초 시차를 두고 슥 올라옵니다.
-      setTimeout(function () {
-        btn.classList.add('is-visible');
-      }, 200 + (index * 100));
-    });
-  });
-
-
-  var sampleMessages = [
-    { id: 's1', name: 'ㅎㅎㅎ', date: '2026.05.25', text: '결혼 축하해요 ♥', sample: true }
-  ];
-
-  var STORAGE_KEY = 'wedding_guestbook_local_v6';
-  var prevPageBtn = document.getElementById('prev-page');
-  var nextPageBtn = document.getElementById('next-page');
-  var openMessageModalBtn = document.getElementById('open-message-modal');
-  var messageModal = document.getElementById('message-modal');
-  var messageModalDim = document.getElementById('message-modal-dim');
-  var closeMessageModalBtn = document.getElementById('close-message-modal');
-  var cancelMessageModalBtn = document.getElementById('cancel-message-modal');
-  var deleteModal = document.getElementById('delete-modal');
-  var deleteModalDim = document.getElementById('delete-modal-dim');
-  var closeDeleteModalBtn = document.getElementById('close-delete-modal');
-  var cancelDeleteModalBtn = document.getElementById('cancel-delete-modal');
-  var confirmDeleteBtn = document.getElementById('confirm-delete-btn');
-  var deletePasswordInput = document.getElementById('delete-password');
-  var copyButtons = Array.from(document.querySelectorAll('.copy-btn'));
-
-  var pageSize = 5;
-  var currentPage = 1;
-  var deleteTargetId = null;
-
-  function openMessageModal() {
-    messageModal.classList.add('open');
-    messageModal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeMessageModal() {
-    messageModal.classList.remove('open');
-    messageModal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-
-  function openDeleteModal(id) {
-    deleteTargetId = id;
-    deletePasswordInput.value = '';
-    deleteModal.classList.add('open');
-    deleteModal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeDeleteModal() {
-    deleteTargetId = null;
-    deletePasswordInput.value = '';
-    deleteModal.classList.remove('open');
-    deleteModal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-
-  function loadStoredMessages() {
-    try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    } catch (e) {
-      return [];
-    }
-  }
-
-  function saveStoredMessages(data) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  }
-
   // 1. 카카오 SDK 초기화 (중복 초기화 방지)
   if (typeof Kakao !== 'undefined' && !Kakao.isInitialized()) {
     Kakao.init('32599aff7bd9dd685d2d1ba374b08f7b');
   }
-
 
   // 2. 버튼 클릭 이벤트 리스너 등록
   var kakaoBtn = document.getElementById('kakao-share-btn');
@@ -269,25 +191,36 @@
     });
   }
 
+   // 📜 네비게이션 버튼 기능 통합 구역 (애니메이션 + 부드러운 스크롤)
+  window.addEventListener('DOMContentLoaded', function () {
+    // 1. 네비게이션 바 안의 버튼들을 정확하게 수집합니다.
+    var navButtons = document.querySelectorAll('.wedding-nav-bar .nav-btn');
 
-  var navButtons = document.querySelectorAll('.nav-btn');
+    // 2. 버튼 등장 애니메이션 실행
+    navButtons.forEach(function (btn, index) {
+      // 0.2초 대기 후 좌측 버튼부터 0.1초 시차를 두고 슥 올라옵니다.
+      setTimeout(function () {
+        btn.classList.add('is-visible');
+      }, 200 + (index * 100));
+    });
 
-  navButtons.forEach(function (button) {
-    button.addEventListener('click', function () {
-      // 1. 버튼의 목적지 ID 가져오기 (#location-section 등)
-      var targetId = this.getAttribute('data-target');
-      var targetSection = document.querySelector(targetId);
+    // 3. 버튼 클릭 시 해당 위치로 부드러운 스크롤 이동 이벤트 연결
+    navButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        var targetId = this.getAttribute('data-target');
+        var targetSection = document.querySelector(targetId);
 
-      if (targetSection) {
-        // 2. 해당 구역이 화면 최상단에서 얼마나 떨어져 있는지 절대 거리 계산
-        var targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+        if (targetSection) {
+          // 해당 구역이 화면 최상단에서 얼마나 떨어져 있는지 절대 거리 계산
+          var targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
 
-        // 3. 브라우저 창 전체를 해당 높이 좌표로 부드럽게 스크롤
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
-      }
+          // 브라우저 창 전체를 해당 높이 좌표로 부드럽게 이동
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
     });
   });
 
@@ -302,32 +235,5 @@
       });
     });
   }
-
-  if (openMessageModalBtn) openMessageModalBtn.addEventListener('click', openMessageModal);
-  if (closeMessageModalBtn) closeMessageModalBtn.addEventListener('click', closeMessageModal);
-  if (cancelMessageModalBtn) cancelMessageModalBtn.addEventListener('click', closeMessageModal);
-  if (messageModalDim) messageModalDim.addEventListener('click', closeMessageModal);
-
-  if (closeDeleteModalBtn) closeDeleteModalBtn.addEventListener('click', closeDeleteModal);
-  if (cancelDeleteModalBtn) cancelDeleteModalBtn.addEventListener('click', closeDeleteModal);
-  if (deleteModalDim) deleteModalDim.addEventListener('click', closeDeleteModal);
-
-  copyButtons.forEach(function (button) {
-    button.addEventListener('click', async function () {
-      var text = button.getAttribute('data-copy');
-      if (!text) return;
-
-      try {
-        await navigator.clipboard.writeText(text);
-        var original = button.textContent;
-        button.textContent = '복사완료';
-        setTimeout(function () {
-          button.textContent = original;
-        }, 1200);
-      } catch (e) {
-        alert('복사에 실패했습니다.');
-      }
-    });
-  });
 
 })();
