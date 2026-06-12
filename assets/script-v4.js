@@ -11,7 +11,7 @@ if (heroBg) {
   var imgEl = document.createElement('img');
 
   // 1. 변환한 WebP 파일 경로 (파일명과 확장자를 확인하세요)
-  imgEl.src = './assets/images/hero/01.webp'; 
+  imgEl.src = './assets/images/hero/01wp.webp'; 
   imgEl.alt = 'Wedding Invitation Video';
 
   // 2. 꽉 차게 보여주기 위한 스타일 설정
