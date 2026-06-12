@@ -7,32 +7,25 @@
   if (textEl) textEl.textContent = String(days) + '일';
 
   var heroBg = document.getElementById('hero-bg');
-  if (heroBg) {
-    var videoEl = document.createElement('video');
+if (heroBg) {
+  var imgEl = document.createElement('img');
 
-    // 영상 파일 경로 (본인의 파일명으로 수정하세요)
-    videoEl.src = './assets/images/hero/01.mp4';
+  // 1. 변환한 WebP 파일 경로 (파일명과 확장자를 확인하세요)
+  imgEl.src = './assets/images/hero/01.webp'; 
+  imgEl.alt = 'Wedding Invitation Video';
 
-    // 🔇 소리 없이 계속 재생하기 위한 핵심 설정
-    videoEl.autoplay = true;   // 페이지 열리면 자동 재생
-    videoEl.loop = true;       // 끝까지 재생되면 처음부터 무한 반복
-    videoEl.muted = true;      // ⚠️ 음소거 (이게 없으면 모바일에서 재생이 안 됩니다)
-    videoEl.playsInline = true; // ⚠️ iOS 아이폰에서 전체화면으로 튕기는 현상 방지
+  // 2. 꽉 차게 보여주기 위한 스타일 설정
+  imgEl.style.width = '100%';
+  imgEl.style.height = '100%';
+  imgEl.style.objectFit = 'cover'; // 영상 비율 유지하며 화면 채우기
+  imgEl.style.position = 'absolute';
+  imgEl.style.top = '0';
+  imgEl.style.left = '0';
 
-    // 꽉 차게 보여주기 위한 스타일 설정
-    videoEl.style.width = '100%';
-    videoEl.style.height = '100%';
-    videoEl.style.objectFit = 'cover'; // 영상 비율 유지하며 화면 채우기
-    videoEl.style.position = 'absolute';
-    videoEl.style.top = '0';
-    videoEl.style.left = '0';
+  heroBg.innerHTML = '';
+  heroBg.appendChild(imgEl);
+}
 
-    heroBg.innerHTML = '';
-    heroBg.style.aspectRatio = '8 / 10';
-    heroBg.style.width = '100%';
-    heroBg.style.height = 'auto';
-    heroBg.appendChild(videoEl);
-  }
 
   var galleryGrid = document.getElementById('gallery-grid');
   var galleryImages = Array.from({ length: 16 }, function (_, i) {
