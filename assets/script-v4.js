@@ -236,7 +236,8 @@ function initWeddingAudio() {
 // 화면 첫 터치/클릭 시 자동 재생되는 함수
 function startWeddingBgm() {
   initWeddingAudio();
-
+ if (isIOSDevice()) {
+ } else {
   if (weddingAudio.paused) {
     weddingAudio.play().then(function() {
       removeAudioEvents(); // 자동 재생 성공 시 첫 터치 이벤트 해제
@@ -245,6 +246,7 @@ function startWeddingBgm() {
       // 자동 재생 차단 예외 처리
     });
   }
+ }
 }
 
 // 자동 재생용 이벤트 리스너 제거
