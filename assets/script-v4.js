@@ -205,14 +205,31 @@ if (heroBg) {
     });
   }
 
+  
+  
   var weddingAudio = null;
+
+
+  function isIOSDevice() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+}
 
 // 오디오 객체 생성 및 기본 설정 함수
 function initWeddingAudio() {
   if (!weddingAudio) {
     weddingAudio = new Audio('./assets/images/bgm.mp3');
     weddingAudio.loop = true; // 무한 반복 설정
-    weddingAudio.volume = 0.03; 
+
+    
+    if (isIOSDevice()) {
+      // 아이폰은 코드로 볼륨 조절이 불가능하므로, 음소거만 확실히 해제해 줍니다.
+      weddingAudio.muted = false;
+    } else {
+      // 안드로이드, PC 환경에서는 원래 원하셨던 잔잔한 볼륨(3%)으로 설정합니다.
+      weddingAudio.volume = 0.1; 
+    }
+   
   }
 }
 
