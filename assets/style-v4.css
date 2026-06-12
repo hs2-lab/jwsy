@@ -60,6 +60,9 @@ section.is-visible {
 .hero-bg {
   position: absolute;
   inset: 0;
+  width: 100%;       /* 추가 */
+  height: 100%;      /* 추가: 이미지가 영역을 가득 채우도록 설정 */
+
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
